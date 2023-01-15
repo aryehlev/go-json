@@ -93,11 +93,6 @@ func (d *mapDecoder) DecodeStream(s *Stream, depth int64, p unsafe.Pointer) erro
 		s.cursor++
 		return nil
 	}
-	if s.buf[s.cursor+1] == '}' {
-		*(*unsafe.Pointer)(p) = mapValue
-		s.cursor++
-		return nil
-	}
 	for {
 		k := unsafe_New(d.keyType)
 		if err := d.keyDecoder.DecodeStream(s, depth, k); err != nil {

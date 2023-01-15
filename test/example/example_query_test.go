@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-
-	"github.com/goccy/go-json"
 )
 
 type User struct {

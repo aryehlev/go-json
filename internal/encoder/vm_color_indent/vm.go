@@ -7,8 +7,8 @@ import (
 	"sort"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/aryehlev/go-json/internal/encoder"
+	"github.com/aryehlev/go-json/internal/runtime"
 )
 
 func Run(ctx *encoder.RuntimeContext, b []byte, codeSet *encoder.OpcodeSet) ([]byte, error) {
@@ -1745,7 +1745,7 @@ func Run(ctx *encoder.RuntimeContext, b []byte, codeSet *encoder.OpcodeSet) ([]b
 			}
 			v := ptrToString(p + uintptr(code.Offset))
 			if v == "" {
-				code = code.Next
+				code = code.NextField
 			} else {
 				b = appendStructKey(ctx, code, b)
 				b = appendString(ctx, b, v)

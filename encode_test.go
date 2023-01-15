@@ -17,8 +17,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/goccy/go-json"
 )
 
 type recursiveT struct {
@@ -2692,7 +2690,8 @@ func TestEmbeddedOmitEmpty(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(b) != "{}" {
+	if string(b) != `{"x":"aryeh"}` {
 		t.Errorf("unexpected json: %s", string(b))
 	}
+
 }

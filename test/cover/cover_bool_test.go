@@ -5,8 +5,6 @@ import (
 	stdjson "encoding/json"
 	"fmt"
 	"testing"
-
-	"github.com/goccy/go-json"
 )
 
 type customBool bool

@@ -7,8 +7,6 @@ import (
 	"math/rand"
 	"reflect"
 	"testing"
-
-	"github.com/goccy/go-json"
 )
 
 var validTests = []struct {

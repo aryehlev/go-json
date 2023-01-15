@@ -4,8 +4,6 @@ import (
 	"context"
 	"reflect"
 	"testing"
-
-	"github.com/goccy/go-json"
 )
 
 type queryTestX struct {

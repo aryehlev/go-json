@@ -18,8 +18,6 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-
-	"github.com/goccy/go-json"
 )
 
 // Test values for the stream test.

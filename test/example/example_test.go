@@ -11,8 +11,6 @@ import (
 	"log"
 	"os"
 	"strings"
-
-	"github.com/goccy/go-json"
 )
 
 func ExampleMarshal() {

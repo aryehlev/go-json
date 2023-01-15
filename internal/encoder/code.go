@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/aryehlev/go-json/internal/runtime"
 )
 
 type Code interface {
@@ -697,8 +697,18 @@ func (c *StructFieldCode) addStructEndCode(ctx *compileContext, codes Opcodes) O
 		DisplayIdx: ctx.opcodeIndex,
 		Indent:     ctx.indent,
 	}
+	code := codes.First()
+
+	for code.Next != nil {
+		code.NextField = code.Next
+		code = code.Next
+
+	}
+	code.NextField = end
 	codes.Last().Next = end
-	codes.First().NextField = end
+
+	//code.NextField = end
+	//codes.First().NextField = end
 	codes = codes.Add(end)
 	ctx.incOpcodeIndex()
 	return codes
@@ -761,6 +771,9 @@ func (c *StructFieldCode) ToOpcode(ctx *compileContext, isFirstField, isEndField
 	}
 	ctx.incIndex()
 	valueCodes := c.toValueOpcodes(ctx)
+	if valueCodes.First().Next != nil && valueCodes.First().NextField == nil && valueCodes.First().Op == OpStructHeadOmitEmptyInt {
+		fmt.Println("aryeh")
+	}
 	if isFirstField {
 		codes := c.headerOpcodes(ctx, field, valueCodes)
 		if isEndField {
@@ -769,6 +782,9 @@ func (c *StructFieldCode) ToOpcode(ctx *compileContext, isFirstField, isEndField
 		return codes
 	}
 	codes := c.fieldOpcodes(ctx, field, valueCodes)
+	if codes.First().Next != nil && codes.First().NextField == nil && codes.First().Op == OpStructHeadOmitEmptyInt {
+		fmt.Println("aryeh")
+	}
 	if isEndField {
 		if isEnableStructEndOptimization(c.value) {
 			field.Op = field.Op.FieldToEnd()
@@ -792,6 +808,9 @@ func (c *StructFieldCode) ToAnonymousOpcode(ctx *compileContext, isFirstField, i
 	}
 	ctx.incIndex()
 	valueCodes := c.toValueOpcodes(ctx)
+	if valueCodes.First().Next != nil && valueCodes.First().NextField == nil && valueCodes.First().Op == OpStructHeadOmitEmptyInt {
+		fmt.Println("aryeh")
+	}
 	if isFirstField {
 		return c.headerOpcodes(ctx, field, valueCodes)
 	}

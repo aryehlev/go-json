@@ -8,8 +8,6 @@ import (
 	"fmt"
 	"log"
 	"strings"
-
-	"github.com/goccy/go-json"
 )
 
 type Size int
